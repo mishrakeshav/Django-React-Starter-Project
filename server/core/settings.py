@@ -123,6 +123,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

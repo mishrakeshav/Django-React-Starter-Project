@@ -17,6 +17,10 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
+// API 
+// API 
+import { signIn } from '../../../api/auth';
+
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
@@ -35,7 +39,16 @@ export default function LoginForm() {
       remember: true
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
+    onSubmit: async () => {
+      try{
+      
+        const profile = await signIn({username : formik.values.email, password : formik.values.password});
+        if(profile.status===200){
+          localStorage.setItem('auth', JSON.stringify(profile?.data));
+        }
+      }catch(error){
+        console.log(error);
+      }
       navigate('/dashboard', { replace: true });
     }
   });
